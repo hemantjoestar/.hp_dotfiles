@@ -1,0 +1,200 @@
+let $RTP=split(&runtimepath, ',')[0]
+let $VIMRC="$HOME/.vim/vimrc"
+
+set nocompatible
+filetype off
+let mapleader=","
+nnoremap ; :
+
+call plug#begin()
+
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-dispatch'
+
+Plug 'jiangmiao/auto-pairs'
+
+Plug 'preservim/tagbar'
+
+Plug 'vimwiki/vimwiki'
+
+Plug 'vim-airline/vim-airline'
+
+Plug 'vyperlang/vim-vyper'
+
+Plug 'nvie/vim-flake8'
+
+call plug#end()
+
+" let g:python3_host_prog = '/usr/bin/python'
+
+set autoread
+
+syntax on                         " Turn on syntax highlighting
+filetype on
+filetype plugin indent on         " Add filetype, plugin, and indent support
+
+set nospell
+highlight SpellBad ctermbg=3
+autocmd FileType gitcommit setlocal spell
+
+au BufRead,BufNewFile *.py set filetype=python
+
+set cursorline                  " underline where the cursor is
+set showbreak=↪\ 
+set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+set nolist
+set backspace=indent,eol,start    " Backspace everything in insert mode
+set formatoptions=tcroql          " Auto-wrap comments
+set expandtab                     " Prefer spaces over tabs in general
+set hidden                        " Prefer hiding over unloading buffers
+set path=.,**                     " Relative to current file and everything under :pwd
+
+set wildmode=longest,full         
+set wildmenu                      " Display matches in command-line mode
+set wildignore=**/node_modules/**,**/dist/**,*.pyc
+set noswapfile                    " Disables swapfiles
+
+set incsearch
+set ignorecase smartcase
+
+
+autocmd InsertEnter * :setlocal nohlsearch
+autocmd InsertLeave * :setlocal hlsearch
+
+" Bindings for more efficient path-based file navigation
+nnoremap <C-f> :find 
+" nnoremap <leader>v :vert sfind 
+" nnoremap ,F :find <C-R>=fnameescape(expand('%:p:h')).'/**/*'<CR>
+" nnoremap ,V :vert sfind <C-R>=fnameescape(expand('%:p:h')).'/**/*'<CR>
+
+" Useful for accessing commonly-used files
+nnoremap <leader>rc :e $HOME/.bashrc<CR>
+nnoremap <leader>r :e $RTP<CR>
+nnoremap <leader>v :e $VIMRC<CR>
+nnoremap <leader>f :e <C-R>='$RTP/after/ftplugin/'.&filetype.'.vim'<CR><CR>
+
+" a or i onenter to enter comamnds
+" <C-d> twice to exit
+" nnoremap <leader>t :set nospell \| split \| term<CR>
+nnoremap <leader>t :set nospell \| term<CR>
+
+" Argslist navigation
+nnoremap [a :previous<CR>
+nnoremap ]a :next<CR>
+
+" set tags=./tags;,tags;            " Find tags relative to current file and directory
+" set wildcharm=<C-z>               " Macro-compatible command-line wildchar
+" set t_BE=                         " Disable bracketed paste mode
+
+" makes sense globally
+" but add to filetypes vim if it overrises <CR> like vimwiki
+inoremap  <expr><TAB> pumvisible()? "\<C-n>" : "\<TAB>"
+inoremap  <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap  <expr>; pumvisible() ? "\<C-y>" : ";"
+" cancel menu
+inoremap  <expr><Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
+
+set completeopt=menuone,preview,noselect,noinsert
+
+highlight PmenuSel ctermbg=white
+highlight Pmenu ctermbg=blue
+"
+" Copy current visual to system clipboard
+map <leader>c "+y
+
+" Kill bad habits
+" inoremap <esc> <nop>
+nnoremap <Up> <NOP>
+nnoremap <Down> <NOP>
+nnoremap <Left> <NOP>
+nnoremap <Right> <NOP>
+inoremap <Up> <NOP>
+inoremap <Down> <NOP>
+inoremap <Left> <NOP>
+inoremap <Right> <NOP>
+" inoremap jj <ESC>
+
+" C-p completion
+" set completeopt+=menuone,noselect,noinsert " don't insert text automatically
+set pumheight=10 " keep the autocomplete suggestion menu small
+set shortmess+=c " don't give ins-completion-menu messages
+
+
+
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+			\ 'auto_diary_index':1,
+			\ 'auto_tags':1,
+			\ 'ext': '.wiki'}]
+" let g:vimwiki_global_ext = 0
+
+nmap <F8> :TagbarToggle<CR><C-w><C-w>
+
+
+
+" https://vim.fandom.com/wiki/Automatically_open_the_quickfix_window_on_:make
+" Automatically open, but do not go to (if there are errors) the quickfix /
+" location list window, or close it when is has become empty.
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
+
+" to able able to call nvim from command line with commands
+command! Enter :normal<CR>
+
+" to be installed from https://github.com/powerline/fonts
+let g:airline_powerline_fonts = 1
+
+let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline#extensions#tabline#right_sep = ''
+let g:airline#extensions#tabline#right_alt_sep = ''
+
+
+let g:airline_section_y=''
+let g:airline_section_warning=''
+let g:airline_section_error=''
+let g:airline_section_z='%#__accent_bold#%p%% %#__accent_bold#%l%#__restore__#%#__accent_bold#/%L%'
+
+
+let g:airline#extensions#fugitiveline#enabled = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#branch#empty_message = ''
+let g:airline#extensions#branch#vcs_priority = ["git"]
+
+" ting and entering into insert within quote completion
+" J as in Jump
+nnoremap J la
+
+augroup VCenterCursor
+	au!
+	au BufEnter,WinEnter,WinNew,VimResized *,*.*
+				\ let &scrolloff=winheight(win_getid())/2
+augroup END
+
+
+
+
+
+
+
+
+" au BufWinLeave * mkview
+" au BufWinEnter * silent loadview
+
+" augroup ManageLastEditMark
+" 	autocmd!
+" 	if len(argv())>0
+" 		silent echom "vim launched withs args"
+" 		normal '.
+" 	endif
+" augroup END
+
+" https://vi.stackexchange.com/questions/4120/how-to-enable-disable-an-augroup-on-the-fly
+" https://vi.stackexchange.com/questions/2545/how-can-i-run-an-autocmd-when-starting-vim-with-no-file-a-non-existing-file-or
+" au VimEnter * call HandleVimEnterGracefully()
