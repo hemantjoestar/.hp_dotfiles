@@ -1,11 +1,10 @@
 set shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent smartindent
-set colorcolumn=95
+set colorcolumn=97
 
 nnoremap * *:%s/<C-r>//
 set iskeyword+=- "personal preference"
-set iskeyword+=. "personal preference"
 
-setlocal spellfile=~/.config/nvim/spell/crypto.utf-8.add
+setlocal spellfile=~/.vim/spell/crypto.utf-8.add
 setlocal spelllang=en_us
 setlocal nospell
 
@@ -38,8 +37,8 @@ augroup vimwikiBindings
 
 augroup END
 
-"" tags settings... override default complete settings and read only from
-"" generated .vimwiki.tags
+" tags settings... override default complete settings and read only from
+" generated .vimwiki.tags
 
 "set complete=t,.
 

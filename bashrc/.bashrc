@@ -135,6 +135,9 @@ alias ytpl="youtube-dl -f 22 -o '%(playlist)s/%(playlist_index)s - %(title)s.%(e
 alias python=python3
 alias o="o.sh"
 alias dot="cd ~/.dotfiles"
+
+alias rc="rustc"
+alias cr="cargo run"
 set -o vi
 
 # cdc into directory merely by typing name
@@ -162,3 +165,9 @@ export PATH="$PATH:/home/hemant/scripts"
 export PATH="$PATH:/home/hemant/.local/bin"
 export PDFREADER="zathura"
 export IMAGEREADER="lximage-qt"
+
+export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/library
+
+# export SAGE_ROOT="~/apps/bin/sage"
+# export MAKE="make -j4"
+. "$HOME/.cargo/env"

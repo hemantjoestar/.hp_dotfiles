@@ -1,3 +1,12 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =1
-let g:netrw_dirhist_1='/home/hemant/.dotfiles/vim/.vim/compiler'
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/home/hemant/.hp_scripts/scripts/scripts'
+let g:netrw_dirhist_6='/home/hemant/code/rust/lols1'
+let g:netrw_dirhist_5='/home/hemant/code/rust/lols1/src'
+let g:netrw_dirhist_4='/home/hemant/code/rust/rust-book/minigrep'
+let g:netrw_dirhist_3='/home/hemant/.hp_notes/vimwiki/vimwiki/templates'
+let g:netrw_dirhist_2='/home/hemant/Downloads/Annex/annex-backend-master'
+let g:netrw_dirhist_1='/home/hemant/Downloads/Annex/annex-backend-master/config'
+let g:netrw_dirhist_0='/home/hemant/Downloads/Annex'
+let g:netrw_dirhist_9='/home/hemant/Downloads/Annex/annex-backend-master/routes'
+let g:netrw_dirhist_8='/home/hemant/Downloads/Annex/annex-backend-master/services'

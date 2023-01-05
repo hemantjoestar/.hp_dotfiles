@@ -12,7 +12,7 @@ general {
 }
 
 #order += "ipv6"
-order += "read_file bright"
+# order += "read_file bright"
 order += "volume master"
 order += "wireless _first_"
 order += "ethernet _first_"
